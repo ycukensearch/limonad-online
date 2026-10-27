@@ -58,6 +58,7 @@
             margin-bottom: 1rem;
             padding: 0 0.5rem;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .trust-points {
@@ -73,6 +74,12 @@
             align-items: center;
             gap: 8px;
             white-space: nowrap;
+        }
+
+        .top-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .shop-btn {
@@ -99,10 +106,35 @@
             box-shadow: 0 2px 0 #4e2a6b, 0 6px 12px -3px #2d1245;
         }
 
+        .achieve-btn {
+            background: #4f9a6b;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            box-shadow: 0 6px 0 #2e6642, 0 8px 15px -3px #173520;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            border: 2px solid #a8e8c9;
+            text-shadow: 0 2px 0 #1f4a2e;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .achieve-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #2e6642, 0 6px 12px -3px #173520;
+        }
+
         .glass-container {
             display: flex;
             justify-content: center;
             margin-bottom: 1.8rem;
+            position: relative;
         }
 
         canvas {
@@ -314,7 +346,7 @@
             justify-content: center;
         }
 
-        /* Магазин (модальное окно) */
+        /* Модальное окно (общее) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -368,7 +400,7 @@
             flex-shrink: 0;
         }
 
-        .shop-items {
+        .shop-items, .achievements-list {
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
@@ -379,16 +411,19 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .shop-items::-webkit-scrollbar {
+        .shop-items::-webkit-scrollbar,
+        .achievements-list::-webkit-scrollbar {
             width: 8px;
         }
 
-        .shop-items::-webkit-scrollbar-track {
+        .shop-items::-webkit-scrollbar-track,
+        .achievements-list::-webkit-scrollbar-track {
             background: #ffffff40;
             border-radius: 10px;
         }
 
-        .shop-items::-webkit-scrollbar-thumb {
+        .shop-items::-webkit-scrollbar-thumb,
+        .achievements-list::-webkit-scrollbar-thumb {
             background: #6c8da8;
             border-radius: 10px;
         }
@@ -482,9 +517,60 @@
             box-shadow: 0 1px 0 #b0c4d9;
         }
 
+        /* Достижения */
+        .achievement {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #ffffffb0;
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 0 #b0c4d9, inset 0 2px 6px white;
+            border: 2px solid #ffffff;
+            flex-shrink: 0;
+        }
+
+        .achievement.locked {
+            opacity: 0.55;
+            filter: grayscale(0.6);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .achievement-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .achievement-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1e3b4f;
+            margin-bottom: 2px;
+        }
+
+        .achievement-desc {
+            font-size: 0.85rem;
+            color: #3d5a70;
+        }
+
+        .achievement-progress {
+            font-size: 0.8rem;
+            color: #7b4fa0;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .achievement-status {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
         /* ========= АДАПТИВ ========= */
 
-        /* Планшеты и небольшие ноутбуки */
         @media (max-width: 768px) {
             body {
                 padding: 0.5rem;
@@ -506,7 +592,7 @@
                 padding: 0.5rem 1.2rem;
             }
 
-            .shop-btn {
+            .shop-btn, .achieve-btn {
                 font-size: 1rem;
                 padding: 0.5rem 1.2rem;
             }
@@ -546,7 +632,6 @@
             }
         }
 
-        /* Телефоны */
         @media (max-width: 520px) {
             body {
                 padding: 0;
@@ -581,11 +666,18 @@
                 box-shadow: 0 3px 0 #c9a82b, inset 0 2px 6px #fff9cf;
             }
 
-            .shop-btn {
+            .shop-btn, .achieve-btn {
                 font-size: 0.9rem;
                 padding: 0.45rem 1rem;
                 gap: 4px;
+            }
+
+            .shop-btn {
                 box-shadow: 0 4px 0 #4e2a6b, 0 6px 12px -3px #2d1245;
+            }
+
+            .achieve-btn {
+                box-shadow: 0 4px 0 #2e6642, 0 6px 12px -3px #173520;
             }
 
             .glass-container {
@@ -705,9 +797,33 @@
                 font-size: 1rem;
                 padding: 0.5rem 1.5rem;
             }
+
+            .achievement {
+                padding: 0.6rem 0.9rem;
+                border-radius: 16px;
+            }
+
+            .achievement-icon {
+                font-size: 1.5rem;
+            }
+
+            .achievement-name {
+                font-size: 0.92rem;
+            }
+
+            .achievement-desc {
+                font-size: 0.78rem;
+            }
+
+            .achievement-progress {
+                font-size: 0.75rem;
+            }
+
+            .achievement-status {
+                font-size: 1.2rem;
+            }
         }
 
-        /* Очень маленькие телефоны */
         @media (max-width: 360px) {
             .title {
                 font-size: 1.1rem;
@@ -743,7 +859,7 @@
                 padding: 0.4rem 0.8rem;
             }
 
-            .shop-btn {
+            .shop-btn, .achieve-btn {
                 font-size: 0.85rem;
                 padding: 0.4rem 0.8rem;
             }
@@ -759,7 +875,6 @@
             }
         }
 
-        /* Ландшафтная ориентация на телефоне */
         @media (max-height: 500px) and (orientation: landscape) {
             body {
                 align-items: center;
@@ -828,6 +943,41 @@
                 padding: 0.3rem 1rem;
             }
         }
+
+        /* Уведомление о достижении */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: linear-gradient(135deg, #4f9a6b 0%, #2e6642 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            box-shadow: 0 10px 30px -5px #00000080, inset 0 2px 10px #ffffff40;
+            font-weight: 700;
+            font-size: 1.1rem;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid #a8e8c9;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            max-width: 90vw;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 520px) {
+            .toast {
+                font-size: 0.95rem;
+                padding: 0.8rem 1.4rem;
+                top: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -838,9 +988,14 @@
         <div class="trust-points">
             <span>🤝</span> <span id="trustValue">0</span>
         </div>
-        <button class="shop-btn" id="shopBtn">
-            <span>🛒</span> Магазин
-        </button>
+        <div class="top-buttons">
+            <button class="achieve-btn" id="achieveBtn">
+                <span>🏆</span> Достижения
+            </button>
+            <button class="shop-btn" id="shopBtn">
+                <span>🛒</span> Магазин
+            </button>
+        </div>
     </div>
 
     <div class="glass-container">
@@ -868,16 +1023,26 @@
     </div>
 </div>
 
-<!-- Модальное окно магазина -->
+<!-- Магазин -->
 <div class="modal-overlay" id="shopModal">
     <div class="modal">
         <div class="modal-title">🛒 Магазин вкусов</div>
-        <div class="shop-items" id="shopItems">
-            <!-- Заполняется динамически -->
-        </div>
-        <button class="close-modal" id="closeModal">Закрыть</button>
+        <div class="shop-items" id="shopItems"></div>
+        <button class="close-modal" id="closeShopModal">Закрыть</button>
     </div>
 </div>
+
+<!-- Достижения -->
+<div class="modal-overlay" id="achieveModal">
+    <div class="modal">
+        <div class="modal-title">🏆 Достижения</div>
+        <div class="achievements-list" id="achievementsList"></div>
+        <button class="close-modal" id="closeAchieveModal">Закрыть</button>
+    </div>
+</div>
+
+<!-- Уведомление -->
+<div class="toast" id="toast"></div>
 
 <script>
     (function() {
@@ -890,9 +1055,14 @@
         const flavorPanel = document.getElementById('flavorPanel');
         const trustValueEl = document.getElementById('trustValue');
         const shopBtn = document.getElementById('shopBtn');
+        const achieveBtn = document.getElementById('achieveBtn');
         const shopModal = document.getElementById('shopModal');
+        const achieveModal = document.getElementById('achieveModal');
         const shopItems = document.getElementById('shopItems');
-        const closeModal = document.getElementById('closeModal');
+        const achievementsList = document.getElementById('achievementsList');
+        const closeShopModal = document.getElementById('closeShopModal');
+        const closeAchieveModal = document.getElementById('closeAchieveModal');
+        const toast = document.getElementById('toast');
 
         // Размеры canvas
         const CANVAS_W = 400;
@@ -900,11 +1070,7 @@
 
         // Параметры стакана
         const GLASS = {
-            x: 100,
-            y: 80,
-            width: 200,
-            bottomWidth: 160,
-            height: 320,
+            x: 100, y: 80, width: 200, bottomWidth: 160, height: 320,
         };
         const BOTTOM_X = GLASS.x + (GLASS.width - GLASS.bottomWidth) / 2;
         const BOTTOM_Y = GLASS.y + GLASS.height;
@@ -914,8 +1080,11 @@
         let fillLevel = 0.0;
         const MAX_FILL = 0.92;
         let trustPoints = 0;
+        let totalGifts = 0;
+        let totalPoured = 0; // сколько раз полностью налили
+        let totalPurchases = 0;
 
-        // Все вкусы (магазин + стартовые)
+        // Все вкусы
         const ALL_FLAVORS = [
             { id: 'classic', name: 'Классика', color: '#FFD966', emoji: '🍋', price: 0 },
             { id: 'tarhun', name: 'Тархун', color: '#8FD46A', emoji: '🌿', price: 3 },
@@ -927,7 +1096,23 @@
             { id: 'ultra', name: 'Ультра крутой', color: '#D946EF', emoji: '💎', price: 1000 },
         ];
 
-        // Купленные вкусы (classic всегда доступен)
+        // Достижения
+        const ALL_ACHIEVEMENTS = [
+            { id: 'first_gift', name: 'Первый подарок', desc: 'Подари первый стакан другу', icon: '🎁', check: () => totalGifts >= 1, progress: () => `${Math.min(totalGifts, 1)}/1` },
+            { id: 'gift_10', name: 'Щедрая душа', desc: 'Подари 10 стаканов', icon: '💝', check: () => totalGifts >= 10, progress: () => `${Math.min(totalGifts, 10)}/10` },
+            { id: 'gift_50', name: 'Друг всех', desc: 'Подари 50 стаканов', icon: '🤗', check: () => totalGifts >= 50, progress: () => `${Math.min(totalGifts, 50)}/50` },
+            { id: 'gift_100', name: 'Легенда лимонада', desc: 'Подари 100 стаканов', icon: '👑', check: () => totalGifts >= 100, progress: () => `${Math.min(totalGifts, 100)}/100` },
+            { id: 'first_buy', name: 'Шопоголик', desc: 'Купи первый вкус в магазине', icon: '🛍️', check: () => totalPurchases >= 1, progress: () => `${Math.min(totalPurchases, 1)}/1` },
+            { id: 'buy_all', name: 'Коллекционер', desc: 'Купи все вкусы', icon: '🏆', check: () => unlockedFlavors.length >= ALL_FLAVORS.length, progress: () => `${unlockedFlavors.length}/${ALL_FLAVORS.length}` },
+            { id: 'pour_25', name: 'Трудяга', desc: 'Налей 25 стаканов полностью', icon: '💧', check: () => totalPoured >= 25, progress: () => `${Math.min(totalPoured, 25)}/25` },
+            { id: 'rich', name: 'Богач', desc: 'Накопи 50 очков доверия', icon: '💰', check: () => trustPoints >= 50, progress: () => `${Math.min(trustPoints, 50)}/50` },
+            { id: 'ultra_owner', name: 'Ультра крутой', desc: 'Купи ультра крутой вкус', icon: '💎', check: () => unlockedFlavors.includes('ultra'), progress: () => unlockedFlavors.includes('ultra') ? '1/1' : '0/1' },
+        ];
+
+        // Разблокированные достижения (id)
+        let unlockedAchievements = [];
+
+        // Купленные вкусы
         let unlockedFlavors = ['classic'];
 
         let currentFlavor = {
@@ -938,6 +1123,219 @@
 
         let isPouring = false;
         let pourInterval = null;
+
+        // --- Звук (Web Audio API) ---
+        let audioCtx = null;
+        let soundEnabled = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (e) {
+                    console.log('Audio not supported');
+                    soundEnabled = false;
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        // Звук наливания (непрерывный шум с фильтром)
+        let pourSoundNode = null;
+        let pourGainNode = null;
+
+        function startPourSound() {
+            if (!soundEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+
+            try {
+                // Шум для звука льющейся воды
+                const bufferSize = audioCtx.sampleRate * 2;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+                noise.loop = true;
+
+                // Фильтр, чтобы звук был "водянистым"
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 1200;
+                filter.Q.value = 0.6;
+
+                // Gain для контроля громкости
+                pourGainNode = audioCtx.createGain();
+                pourGainNode.gain.value = 0.08;
+
+                // Небольшая модуляция частоты для "бульканья"
+                const lfo = audioCtx.createOscillator();
+                lfo.frequency.value = 3;
+                const lfoGain = audioCtx.createGain();
+                lfoGain.gain.value = 400;
+                lfo.connect(lfoGain);
+                lfoGain.connect(filter.frequency);
+                lfo.start();
+
+                noise.connect(filter);
+                filter.connect(pourGainNode);
+                pourGainNode.connect(audioCtx.destination);
+                noise.start();
+
+                pourSoundNode = { noise, lfo, filter };
+            } catch (e) {
+                console.log('Pour sound error', e);
+            }
+        }
+
+        function stopPourSound() {
+            if (pourSoundNode) {
+                try {
+                    pourSoundNode.noise.stop();
+                    pourSoundNode.lfo.stop();
+                    pourSoundNode.noise.disconnect();
+                    pourSoundNode.lfo.disconnect();
+                    if (pourGainNode) pourGainNode.disconnect();
+                } catch (e) {}
+                pourSoundNode = null;
+                pourGainNode = null;
+            }
+        }
+
+        // Звук "бульканья" (короткий пузырёк)
+        function playBubbleSound() {
+            if (!soundEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                // Случайная высота
+                const baseFreq = 400 + Math.random() * 600;
+                osc.frequency.setValueAtTime(baseFreq, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(baseFreq * 2, audioCtx.currentTime + 0.08);
+
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            } catch (e) {}
+        }
+
+        // Звук успеха (для достижений и покупок)
+        function playSuccessSound() {
+            if (!soundEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+
+            try {
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5 E5 G5 C6
+                notes.forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    const startTime = audioCtx.currentTime + i * 0.08;
+                    gain.gain.setValueAtTime(0.001, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.15, startTime + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.2);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.25);
+                });
+            } catch (e) {}
+        }
+
+        // Звук подарка
+        function playGiftSound() {
+            if (!soundEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+
+            try {
+                const notes = [659.25, 880, 1046.50];
+                notes.forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.value = freq;
+                    const startTime = audioCtx.currentTime + i * 0.1;
+                    gain.gain.setValueAtTime(0.001, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.18, startTime + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.35);
+                });
+            } catch (e) {}
+        }
+
+        // --- Сохранение / загрузка ---
+        const SAVE_KEY = 'lemonade_online_save_v1';
+
+        function saveGame() {
+            try {
+                const data = {
+                    trustPoints,
+                    unlockedFlavors,
+                    unlockedAchievements,
+                    totalGifts,
+                    totalPoured,
+                    totalPurchases,
+                    currentFlavorName: currentFlavor.name,
+                    soundEnabled,
+                };
+                localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+            } catch (e) {
+                console.log('Save error', e);
+            }
+        }
+
+        function loadGame() {
+            try {
+                const raw = localStorage.getItem(SAVE_KEY);
+                if (!raw) return;
+                const data = JSON.parse(raw);
+
+                if (typeof data.trustPoints === 'number') trustPoints = data.trustPoints;
+                if (Array.isArray(data.unlockedFlavors)) {
+                    // Проверяем, что вкусы существуют
+                    unlockedFlavors = data.unlockedFlavors.filter(id => ALL_FLAVORS.some(f => f.id === id));
+                    if (!unlockedFlavors.includes('classic')) unlockedFlavors.push('classic');
+                }
+                if (Array.isArray(data.unlockedAchievements)) {
+                    unlockedAchievements = data.unlockedAchievements.filter(id => ALL_ACHIEVEMENTS.some(a => a.id === id));
+                }
+                if (typeof data.totalGifts === 'number') totalGifts = data.totalGifts;
+                if (typeof data.totalPoured === 'number') totalPoured = data.totalPoured;
+                if (typeof data.totalPurchases === 'number') totalPurchases = data.totalPurchases;
+                if (typeof data.soundEnabled === 'boolean') soundEnabled = data.soundEnabled;
+
+                // Восстанавливаем текущий вкус, если он куплен
+                if (data.currentFlavorName && unlockedFlavors.includes(data.currentFlavorName)) {
+                    const f = ALL_FLAVORS.find(fl => fl.id === data.currentFlavorName);
+                    if (f) {
+                        currentFlavor = { name: f.id, color: f.color, emoji: f.emoji };
+                    }
+                }
+            } catch (e) {
+                console.log('Load error', e);
+            }
+        }
 
         // --- Вспомогательные функции ---
         function getFillColor() {
@@ -952,6 +1350,38 @@
             G = Math.min(255, Math.max(0, G + percent));
             B = Math.min(255, Math.max(0, B + percent));
             return `#${((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1)}`;
+        }
+
+        // --- Управление пузырьками ---
+        const bubbles = [];
+
+        function spawnBubble(liquidTopY, liquidHeight) {
+            const bubbleX = BOTTOM_X + 15 + Math.random() * (BOTTOM_W - 30);
+            const bubbleY = BOTTOM_Y - 10 - Math.random() * (liquidHeight * 0.5);
+            const radius = 2 + Math.random() * 5;
+            bubbles.push({
+                x: bubbleX,
+                y: bubbleY,
+                r: radius,
+                vy: 0.3 + Math.random() * 0.8,
+                wobble: Math.random() * Math.PI * 2,
+                wobbleSpeed: 0.05 + Math.random() * 0.1,
+                alpha: 0.4 + Math.random() * 0.4,
+                targetY: liquidTopY + 5,
+            });
+        }
+
+        function updateBubbles() {
+            for (let i = bubbles.length - 1; i >= 0; i--) {
+                const b = bubbles[i];
+                b.y -= b.vy;
+                b.wobble += b.wobbleSpeed;
+                b.x += Math.sin(b.wobble) * 0.4;
+                // Если пузырёк достиг поверхности или вышел за пределы — удаляем
+                if (b.y < b.targetY || b.y < GLASS.y) {
+                    bubbles.splice(i, 1);
+                }
+            }
         }
 
         // --- Отрисовка ---
@@ -989,10 +1419,12 @@
             ctx.lineWidth = 6;
             ctx.stroke();
 
+            let liquidTopY = BOTTOM_Y;
+
             // Жидкость
             if (fillLevel > 0.001) {
                 const liquidHeight = GLASS.height * fillLevel;
-                const liquidTopY = BOTTOM_Y - liquidHeight;
+                liquidTopY = BOTTOM_Y - liquidHeight;
                 const t = (BOTTOM_Y - liquidTopY) / GLASS.height;
                 const liquidWidth = GLASS.bottomWidth + (GLASS.width - GLASS.bottomWidth) * t;
                 const liquidLeft = BOTTOM_X + (BOTTOM_W - liquidWidth) / 2;
@@ -1013,7 +1445,7 @@
                 ctx.fillStyle = liquidGrad;
                 ctx.fill();
 
-                // Блик
+                // Блик на поверхности
                 ctx.beginPath();
                 ctx.moveTo(liquidLeft + 10, liquidTopY + 6);
                 ctx.lineTo(liquidRight - 10, liquidTopY + 6);
@@ -1031,18 +1463,36 @@
                 ctx.lineWidth = 3;
                 ctx.stroke();
 
-                // Пузырьки
-                if (fillLevel > 0.1) {
-                    ctx.fillStyle = '#ffffff70';
-                    for (let i = 0; i < 6; i++) {
-                        const bubbleX = BOTTOM_X + 20 + Math.random() * (BOTTOM_W - 40);
-                        const bubbleY = BOTTOM_Y - 15 - Math.random() * (liquidHeight * 0.7);
-                        const radius = 3 + Math.random() * 5;
-                        ctx.beginPath();
-                        ctx.arc(bubbleX, bubbleY, radius, 0, Math.PI * 2);
-                        ctx.fill();
+                // === РЕАЛИСТИЧНЫЕ ПУЗЫРЬКИ ===
+                // Спавним новые пузырьки, если жидкость есть
+                if (fillLevel > 0.08) {
+                    const spawnChance = isPouring ? 0.6 : 0.25;
+                    if (Math.random() < spawnChance) {
+                        spawnBubble(liquidTopY, liquidHeight);
                     }
                 }
+
+                // Обновляем и рисуем пузырьки
+                updateBubbles();
+                bubbles.forEach(b => {
+                    // Убедимся, что пузырёк внутри жидкости
+                    if (b.y > liquidTopY && b.y < BOTTOM_Y) {
+                        // Пузырёк — кружок с обводкой и бликом
+                        ctx.beginPath();
+                        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${b.alpha * 0.5})`;
+                        ctx.fill();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${b.alpha})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+
+                        // Блик на пузырьке
+                        ctx.beginPath();
+                        ctx.arc(b.x - b.r * 0.3, b.y - b.r * 0.3, b.r * 0.3, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${b.alpha * 0.9})`;
+                        ctx.fill();
+                    }
+                });
             }
 
             // Блик на стекле
@@ -1128,10 +1578,33 @@
                     } else {
                         statusMsg.textContent = `Выбран ${flavor.name} ${flavor.emoji}`;
                     }
+                    saveGame();
                 });
 
                 flavorPanel.appendChild(btn);
             });
+        }
+
+        // --- Проверка достижений ---
+        function checkAchievements() {
+            ALL_ACHIEVEMENTS.forEach(ach => {
+                if (!unlockedAchievements.includes(ach.id) && ach.check()) {
+                    unlockedAchievements.push(ach.id);
+                    showToast(`🏆 Достижение: ${ach.name}!`, ach.icon);
+                    playSuccessSound();
+                }
+            });
+        }
+
+        // --- Тост ---
+        let toastTimeout = null;
+        function showToast(text, icon = '🏆') {
+            toast.innerHTML = `<span style="font-size:1.5rem">${icon}</span> <span>${text}</span>`;
+            toast.classList.add('show');
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
         // --- UI ---
@@ -1153,7 +1626,6 @@
 
             pourBtn.disabled = (fillLevel >= MAX_FILL);
 
-            // Обновляем состояния кнопок вкусов (lock / active)
             document.querySelectorAll('.flavor-btn').forEach(btn => {
                 const flavorId = btn.dataset.flavor;
                 if (unlockedFlavors.includes(flavorId)) {
@@ -1169,12 +1641,13 @@
             });
 
             updateShopItems();
+            checkAchievements();
+            saveGame();
         }
 
         // --- Магазин ---
         function updateShopItems() {
             shopItems.innerHTML = '';
-            // Показываем только некупленные вкусы (кроме classic с ценой 0 — он всегда есть)
             const available = ALL_FLAVORS.filter(f => !unlockedFlavors.includes(f.id) && f.id !== 'classic');
 
             if (available.length === 0) {
@@ -1204,11 +1677,12 @@
                     if (trustPoints >= price && !unlockedFlavors.includes(flavorId)) {
                         trustPoints -= price;
                         unlockedFlavors.push(flavorId);
-                        // Если это был текущий вкус — переключаемся на classic
+                        totalPurchases++;
                         if (currentFlavor.name === flavorId) {
                             currentFlavor = { name: 'classic', color: '#FFD966', emoji: '🍋' };
                         }
                         updateUI();
+                        playSuccessSound();
                         btn.textContent = '✅ Куплено!';
                         btn.disabled = true;
                         setTimeout(() => {
@@ -1220,7 +1694,29 @@
             });
         }
 
+        // --- Достижения ---
+        function renderAchievements() {
+            achievementsList.innerHTML = '';
+            ALL_ACHIEVEMENTS.forEach(ach => {
+                const unlocked = unlockedAchievements.includes(ach.id);
+                const item = document.createElement('div');
+                item.className = 'achievement' + (unlocked ? '' : ' locked');
+                item.innerHTML = `
+                    <div class="achievement-icon">${ach.icon}</div>
+                    <div class="achievement-info">
+                        <div class="achievement-name">${ach.name}</div>
+                        <div class="achievement-desc">${ach.desc}</div>
+                        <div class="achievement-progress">${unlocked ? '✅ Получено' : 'Прогресс: ' + ach.progress()}</div>
+                    </div>
+                    <div class="achievement-status">${unlocked ? '🏅' : '🔒'}</div>
+                `;
+                achievementsList.appendChild(item);
+            });
+        }
+
         // --- Наливание ---
+        let bubbleSoundInterval = null;
+
         function pourStep() {
             if (fillLevel >= MAX_FILL) {
                 stopPouring();
@@ -1230,15 +1726,24 @@
             fillLevel = Math.min(fillLevel + increment, MAX_FILL);
             updateUI();
             if (fillLevel >= MAX_FILL) {
+                totalPoured++;
                 stopPouring();
                 statusMsg.textContent = 'Стакан полон! 🥳';
+                checkAchievements();
+                saveGame();
             }
         }
 
         function startPouring() {
             if (isPouring || fillLevel >= MAX_FILL) return;
+            initAudio(); // Разблокируем аудио по клику
             isPouring = true;
             pourBtn.innerHTML = '<span>💧</span> ЛЬЁТСЯ...';
+            startPourSound();
+            // Звуки бульканья во время наливания
+            bubbleSoundInterval = setInterval(() => {
+                if (Math.random() < 0.6) playBubbleSound();
+            }, 250);
             pourInterval = setInterval(pourStep, 100);
         }
 
@@ -1247,6 +1752,11 @@
                 clearInterval(pourInterval);
                 pourInterval = null;
             }
+            if (bubbleSoundInterval) {
+                clearInterval(bubbleSoundInterval);
+                bubbleSoundInterval = null;
+            }
+            stopPourSound();
             isPouring = false;
             pourBtn.innerHTML = '<span>🚰</span> НАЛИТЬ';
             updateUI();
@@ -1255,6 +1765,7 @@
         function resetSimulator() {
             stopPouring();
             fillLevel = 0.0;
+            bubbles.length = 0;
             updateUI();
             statusMsg.textContent = 'Выберите вкус';
         }
@@ -1263,15 +1774,19 @@
         function giveGift() {
             if (fillLevel < MAX_FILL) return;
             trustPoints += 3;
+            totalGifts++;
             fillLevel = 0.0;
+            bubbles.length = 0;
+            playGiftSound();
             updateUI();
             statusMsg.textContent = 'Спасибо! +3 🤝';
             giftBtn.classList.add('hidden');
+            checkAchievements();
+            saveGame();
         }
 
         // --- События ---
 
-        // Кнопка "Налить"
         pourBtn.addEventListener('mousedown', (e) => {
             e.preventDefault();
             startPouring();
@@ -1287,7 +1802,6 @@
             if (isPouring) stopPouring();
         });
 
-        // Touch
         pourBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             startPouring();
@@ -1301,28 +1815,30 @@
             stopPouring();
         }, { passive: false });
 
-        // Клик по canvas
         canvas.addEventListener('click', () => {
             if (fillLevel >= MAX_FILL) return;
+            initAudio();
             fillLevel = Math.min(fillLevel + 0.15, MAX_FILL);
+            playBubbleSound();
             updateUI();
             if (fillLevel >= MAX_FILL) {
+                totalPoured++;
                 statusMsg.textContent = 'Стакан полон! 🥳';
+                checkAchievements();
+                saveGame();
             }
         });
 
-        // Подарить другу
         giftBtn.addEventListener('click', giveGift);
-
-        // Сброс
         resetBtn.addEventListener('click', resetSimulator);
 
         // Магазин
         shopBtn.addEventListener('click', () => {
+            initAudio();
             shopModal.classList.add('open');
             updateShopItems();
         });
-        closeModal.addEventListener('click', () => {
+        closeShopModal.addEventListener('click', () => {
             shopModal.classList.remove('open');
         });
         shopModal.addEventListener('click', (e) => {
@@ -1331,17 +1847,35 @@
             }
         });
 
-        // Анимация пузырьков
-        setInterval(() => {
-            if (fillLevel > 0.02 && !isPouring) {
+        // Достижения
+        achieveBtn.addEventListener('click', () => {
+            initAudio();
+            achieveModal.classList.add('open');
+            renderAchievements();
+        });
+        closeAchieveModal.addEventListener('click', () => {
+            achieveModal.classList.remove('open');
+        });
+        achieveModal.addEventListener('click', (e) => {
+            if (e.target === achieveModal) {
+                achieveModal.classList.remove('open');
+            }
+        });
+
+        // Анимация пузырьков (постоянная перерисовка, пока есть жидкость)
+        function animateLoop() {
+            if (fillLevel > 0.02) {
                 draw();
             }
-        }, 200);
+            requestAnimationFrame(animateLoop);
+        }
+        animateLoop();
 
         // Инициализация
+        loadGame();
         renderFlavorPanel();
         updateUI();
     })();
 </script>
 </body>
-  </html>
+    </html>
